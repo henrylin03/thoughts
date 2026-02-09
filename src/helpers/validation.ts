@@ -6,14 +6,14 @@ const CHAR_LENGTH_ERROR_255 = "must be between 1 and 255 characters.";
 const validateRegistrationForm = [
 	body("firstName")
 		.trim()
-		.isAlpha()
+		.isAlpha("en-AU", { ignore: "-" })
 		.withMessage(`First name ${ALPHA_ERROR}`)
 		.isLength({ min: 1, max: 255 })
 		.withMessage(`First name ${CHAR_LENGTH_ERROR_255}`),
 
 	body("lastName")
 		.trim()
-		.isAlpha()
+		.isAlpha("en-AU", { ignore: "-" })
 		.withMessage(`Last name ${ALPHA_ERROR}`)
 		.isLength({ min: 1, max: 255 })
 		.withMessage(`Last name ${CHAR_LENGTH_ERROR_255}`),
