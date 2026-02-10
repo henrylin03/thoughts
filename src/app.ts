@@ -1,9 +1,9 @@
 import path from "node:path";
-import connectPgSimple from "connect-pg-simple";
+import genFunc from "connect-pg-simple";
 import "dotenv/config";
 import express from "express";
 import session from "express-session";
-import { pool as pgPool } from "./db/pool.js";
+import { pool } from "./db/pool.js";
 import indexRouter from "./routers/indexRouter.js";
 import loginRouter from "./routers/loginRouter.js";
 import registerRouter from "./routers/registerRouter.js";
@@ -11,7 +11,6 @@ import registerRouter from "./routers/registerRouter.js";
 const app = express();
 
 const currentPath = import.meta.dirname;
-
 app.use(express.static(path.join(currentPath, "..", "public")));
 
 app.set("view engine", "ejs");
@@ -21,15 +20,16 @@ app.set("views", path.join(currentPath, "views"));
 const cookieSecret = process.env.COOKIE_SECRET;
 if (!cookieSecret) throw new Error("COOKIE_SECRET env variable is required.");
 
-const pgSession = connectPgSimple(session);
+const PostgresStore = genFunc(session);
+const sessionStore = new PostgresStore({
+	pool,
+	tableName: "user_session",
+	createTableIfMissing: true,
+});
 
 app.use(
 	session({
-		store: new pgSession({
-			pool: pgPool,
-			tableName: "user_session",
-			createTableIfMissing: true,
-		}),
+		store: sessionStore,
 		secret: cookieSecret,
 		resave: false,
 		saveUninitialized: false,
