@@ -6,7 +6,6 @@ type RegistrationFormData = {
 	lastName: string;
 	username: Email;
 	password: string;
-	confirmPassword: string;
 };
 
 const addUser = async (userData: RegistrationFormData) => {
