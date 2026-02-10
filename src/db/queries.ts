@@ -1,4 +1,4 @@
-const pool = require("./pool");
+import { pool } from "./pool.js";
 
 /* WRITE QUERIES HERE */
 
