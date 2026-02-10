@@ -1,6 +1,7 @@
 import path from "node:path";
 import express from "express";
 import indexRouter from "./routers/indexRouter.js";
+import loginRouter from "./routers/loginRouter.js";
 import registerRouter from "./routers/registerRouter.js";
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
 app.use("/register", registerRouter);
+app.use("/login", loginRouter);
 
 const PORT = 3000;
 app.listen(PORT, (err) => {
