@@ -30,6 +30,10 @@ const validateRegistrationForm = [
 	body("password")
 		.isLength({ min: 8, max: 64 })
 		.withMessage("Password must be between 8 and 64 characters"),
+
+	body("confirmPassword")
+		.custom((value: string, { req }) => value === req.body.password)
+		.withMessage("Passwords must match"),
 ];
 
 export { validateRegistrationForm };
