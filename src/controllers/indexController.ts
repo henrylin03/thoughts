@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import type { Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
 import { addUser } from "../db/queries.js";
@@ -20,9 +21,18 @@ const registerUserPost = [
 				.status(400)
 				.render("pages/signupForm", { errors: errors.array() });
 
-		await addUser(matchedData(req));
+		const { firstName, lastName, username, password } = matchedData(req);
+		const hashedPassword = await bcrypt.hash(password, 10);
+		const formData = {
+			firstName,
+			lastName,
+			username,
+			password: hashedPassword,
+		};
 
-		res.redirect("/register");
+		await addUser(formData);
+
+		res.redirect("/");
 	},
 ];
 
