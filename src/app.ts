@@ -1,13 +1,12 @@
 import path from "node:path";
 import pgSession from "connect-pg-simple";
-import dotenv from "dotenv";
+import "dotenv/config";
 import express from "express";
 import session from "express-session";
 import indexRouter from "./routers/indexRouter.js";
 import loginRouter from "./routers/loginRouter.js";
 import registerRouter from "./routers/registerRouter.js";
 
-dotenv.config();
 const app = express();
 
 const currentPath = import.meta.dirname;
@@ -18,9 +17,12 @@ app.set("view engine", "ejs");
 app.set("views", path.join(currentPath, "views"));
 
 /* middleware */
+const cookieSecret = process.env.COOKIE_SECRET;
+if (!cookieSecret) throw new Error("COOKIE_SECRET env variable is required.");
+
 app.use(
 	session({
-		secret: process.env.COOKIE_SECRET,
+		secret: cookieSecret,
 		resave: false,
 		saveUninitialized: false,
 	}),
