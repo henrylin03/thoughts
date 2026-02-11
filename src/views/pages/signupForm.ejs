@@ -9,7 +9,7 @@
       Create new account
     </h1>
     <% if (typeof errors !== "undefined" && errors.length) {%>
-    <%- include("../partials/errorBlock.ejs", { errors }) %>
+    <%- include("../partials/errorList.ejs", { errors }) %>
     <% } %>
     <form action="/register" method="POST" class="flex flex-col gap-4 max-w-90">
       <div class="grid grid-cols-2 gap-4">
