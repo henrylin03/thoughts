@@ -7,6 +7,9 @@
     <h1 class="mb-4 text-center">
       Welcome back
     </h1>
+    <% if (typeof error !== 'undefined') { %>
+    <%- include("../partials/errorBlock.ejs", { errorMessage: error.message }) %>
+    <% } %>
     <p class="text-center text-sm mt-0">
       <span class="opacity-60">Don't have an account yet?</span>
       <a href="/register">Sign up</a>
