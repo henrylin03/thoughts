@@ -1,11 +1,6 @@
 import type { Request, Response } from "express";
 import passport from "@/config/passport.js";
-
-type LoginField = "username" | "password";
-type LoginError = {
-	field: LoginField;
-	message: string;
-};
+import type { LoginError, LoginField } from "@/models/fields.js";
 
 const getLoginErrorMessage = (fieldWithError: LoginField): string => {
 	if (fieldWithError === "username")
@@ -17,16 +12,19 @@ const getLoginErrorMessage = (fieldWithError: LoginField): string => {
 
 const loginGet = async (req: Request, res: Response) => {
 	const { session } = req;
-	if (!("flash" in session) || session.flash.error.length === 0)
+
+	if (!session.flash || !session.flash.error || !session.flash.error.length)
 		return res.render("pages/loginForm");
 
-	const fieldWithError: LoginField = session.flash.error.pop();
+	const fieldWithError: LoginField | null = session.flash.error.pop() || null;
+
+	if (!fieldWithError) return res.render("pages/loginForm");
+
 	const loginError: LoginError = {
 		field: fieldWithError,
 		message: getLoginErrorMessage(fieldWithError),
 	};
 
-	req.session.flash.error = [];
 	res.render("pages/loginForm", { error: loginError });
 };
 
