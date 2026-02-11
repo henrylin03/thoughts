@@ -1,14 +1,14 @@
 import { pool } from "./pool.js";
 
 type Email = `${string}@${string}`;
-type RegistrationFormData = {
+export type User = {
 	firstName: string;
 	lastName: string;
 	username: Email;
 	password: string;
 };
 
-const addUser = async (userData: RegistrationFormData) => {
+const addUser = async (userData: User) => {
 	const { firstName, lastName, username, password } = userData;
 	try {
 		await pool.query(
@@ -22,4 +22,12 @@ const addUser = async (userData: RegistrationFormData) => {
 	}
 };
 
-export { addUser };
+const getUser = async (username: string) => {
+	const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [
+		username,
+	]);
+	if (!rows.length) return null;
+	return rows[0];
+};
+
+export { addUser, getUser };
