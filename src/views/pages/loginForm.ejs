@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs", { title: "Login | Members only" }) %>
+
+<body class="grid place-items-center min-h-screen p-4">
+  <main class="prose w-90">
+    <h1 class="mb-4 text-center">
+      Welcome back
+    </h1>
+    <% if (typeof error !== 'undefined') { %>
+    <%- include("../partials/errorBlock.ejs", { errorMessage: error.message }) %>
+    <% } %>
+    <p class="text-center text-sm mt-0">
+      <span class="opacity-60">Don't have an account yet?</span>
+      <a href="/register">Sign up</a>
+    </p>
+    <form action="/login" method="POST" class="not-prose mt-8">
+      <ul class="flex flex-col gap-4">
+        <li class="flex flex-col">
+          <label for="usernameInput">Email</label>
+          <fieldset class="fieldset">
+            <label for="usernameInput" class="input w-full <%= typeof error !== 'undefined' && error.field === 'username' ? 'input-error' : ''%>">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[1em] opacity-50 lucide lucide-mail-icon lucide-mail">
+                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+              </svg>
+              <input type="text" name="username" id="usernameInput" class="grow" placeholder="your@email.com" required>
+            </label>
+          </fieldset>
+        </li>
+        <li class="flex flex-col">
+          <label for="passwordInput">Password</label>
+          <label class="input w-full <%= typeof error !== 'undefined' && error.field === 'password' ? 'input-error' : ''%>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-[1em] opacity-50 lucide lucide-lock-icon lucide-lock">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <input type="password" name="password" id="passwordInput" required>
+          </label>
+        </li>
+      </ul>
+      <button type="submit" class="btn btn-primary mt-8 w-full">Log In</button>
+    </form>
+  </main>
+</body>
+
+</html>
