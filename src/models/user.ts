@@ -1,5 +1,5 @@
 type Email = `${string}@${string}`;
-export type User = {
+export type UserData = {
 	firstName: string;
 	lastName: string;
 	username: Email;

@@ -2,12 +2,11 @@ import bcrypt from "bcryptjs";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import { getUserById, getUserByUsername } from "../db/queries.js";
-import type { User } from "../models/user.js";
 
 passport.use(
 	new LocalStrategy.Strategy(async (username, password, done) => {
 		try {
-			const user: User | null = await getUserByUsername(username);
+			const user = await getUserByUsername(username);
 			if (user === null)
 				return done(null, false, { message: "Incorrect username" });
 
