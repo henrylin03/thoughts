@@ -1,12 +1,9 @@
 import { Router } from "express";
-import {
-	protectedPageGet,
-	showHomePageGet,
-} from "../controllers/indexController.js";
+import { logout, showHomePageGet } from "../controllers/indexController.js";
 
 const indexRouter = Router();
 
 indexRouter.get("/", showHomePageGet);
-indexRouter.get("/protected", protectedPageGet);
+indexRouter.get("/log-out", logout);
 
 export default indexRouter;

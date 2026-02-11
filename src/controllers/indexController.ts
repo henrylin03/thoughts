@@ -1,11 +1,13 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 
 const showHomePageGet = async (_req: Request, res: Response) => {
 	res.render("pages/index");
 };
 
-const protectedPageGet = async (_req: Request, res: Response) => {
-	res.render("pages/protected");
-};
+const logout = (req: Request, res: Response, next: NextFunction) =>
+	req.logout((err) => {
+		if (err) return next(err);
+		res.redirect("/");
+	});
 
-export { showHomePageGet, protectedPageGet };
+export { showHomePageGet, logout };
