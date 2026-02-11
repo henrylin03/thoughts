@@ -2,12 +2,9 @@ import type { Request, Response } from "express";
 import passport from "@/config/passport.js";
 import type { LoginError, LoginField } from "@/models/fields.js";
 
-const getLoginErrorMessage = (fieldWithError: LoginField): string => {
-	if (fieldWithError === "username")
-		return "Sorry, we couldn't find an account with that username.";
-	if (fieldWithError === "password")
-		return "Sorry, that password isn't right. Please try again.";
-	else return "";
+const LOGIN_ERROR_MESSAGES = {
+	username: "Sorry, we couldn't find an account with that username.",
+	password: "Sorry, that password isn't right. Please try again.",
 };
 
 const loginGet = async (req: Request, res: Response) => {
@@ -22,7 +19,7 @@ const loginGet = async (req: Request, res: Response) => {
 
 	const loginError: LoginError = {
 		field: fieldWithError,
-		message: getLoginErrorMessage(fieldWithError),
+		message: LOGIN_ERROR_MESSAGES[fieldWithError] || "",
 	};
 
 	res.render("pages/loginForm", { error: loginError });
