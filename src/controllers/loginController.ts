@@ -7,7 +7,7 @@ const loginGet = async (_req: Request, res: Response) => {
 
 const loginPost = passport.authenticate("local", {
 	successRedirect: "/",
-	failureRedirect: "/",
+	failureRedirect: "/login",
 });
 
 export { loginPost, loginGet };
