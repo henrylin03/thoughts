@@ -1,0 +1,27 @@
+<dialog id="<%= id %>" class="modal">
+  <div class="modal-box w-fit prose">
+    <h3>
+      <%= title %>
+    </h3>
+    <p>
+      Please enter the secret passkey provided to you
+    </p>
+    <form action="<%= submitPath %>" method="POST" id="form-for-<%= id %>">
+      <label class="input w-full">
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+            <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+            <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+          </g>
+        </svg>
+        <input type="password" placeholder="Passkey" />
+      </label>
+    </form>
+    <div class="modal-action">
+      <input type="submit" form="form-for-<%= id %>" value="Submit" class="btn btn-primary">
+      <form method="dialog">
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
