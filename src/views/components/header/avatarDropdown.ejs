@@ -6,13 +6,14 @@
   </button>
   <ul tabindex="-1" class="menu dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
     <li>
-      <a href="#">Become a member</a>
+      <button onclick="becomeMemberModal.showModal()">Become a member</button>
     </li>
     <li>
-      <a href="#">Join as admin</a>
+      <button>Join as admin</button>
     </li>
     <li>
       <a href="/logout">Logout</a>
     </li>
   </ul>
 </div>
+<%- include("../modal.ejs", { id: "becomeMemberModal", submitPath: "/become-member" } ) %>
