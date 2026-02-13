@@ -5,8 +5,13 @@
       <span class="text-xl">Thoughts</span>
     </a>
   </div>
-  <div class="flex gap-2">
+  <div class="flex gap-6">
     <% if (locals.currentUser) { %>
+    <a href="/thoughts/new" role="button" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus w-4 flex items-center">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 5l0 14" />
+        <path d="M5 12l14 0" />
+      </svg>Add new thought</a>
     <%- include ("./avatarDropdown") %>
     <% } else { %>
     <a href="/login" role="button" class="btn btn-primary">Log in</a>
