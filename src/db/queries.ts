@@ -32,6 +32,21 @@ const addThought = async (
 	}
 };
 
+const getAllThoughts = async () => {
+	const { rows } = await pool.query(`
+SELECT 
+	u.first_name AS author_first_name, 
+	u.last_name AS author_last_name, 
+	t.title, 
+	t.text, 
+	t.timestamp
+FROM thoughts AS t
+JOIN users AS u 
+	ON t.author_id = u.id`);
+
+	return rows;
+};
+
 // LocalStrategy has to accept username as type string
 const getUserByUsername = async (username: string) => {
 	const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [
@@ -90,6 +105,7 @@ export {
 	addUser,
 	elevateUserToMember,
 	elevateUserToAdmin,
+	getAllThoughts,
 	getPermissionElevationPasskey,
 	getUserById,
 	getUserByUsername,

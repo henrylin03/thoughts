@@ -1,10 +1,13 @@
 import type { Request, Response } from "express";
 import { matchedData, validationResult } from "express-validator";
-import { addThought } from "@/db/queries.js";
+import { addThought, getAllThoughts } from "@/db/queries.js";
 import { validateNewThought } from "@/helpers/validation.js";
 
-const allThoughtsGet = (_req: Request, res: Response) =>
-	res.render("pages/allThoughts");
+const allThoughtsGet = async (_req: Request, res: Response) => {
+	const allThoughts = await getAllThoughts();
+	console.log(allThoughts);
+	res.render("pages/allThoughts", { allThoughts });
+};
 
 const newThoughtGet = (_req: Request, res: Response) => {
 	res.render("pages/newThought", { title: "Add thought" });
