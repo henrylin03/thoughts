@@ -7,7 +7,7 @@
   <div class="flex-1 flex flex-col gap-2 prose">
     <header class="flex items-center justify-between">
       <p><%= thought.author_first_name %> <%=thought.author_last_name%></p>
-      <p class="opacity-50"><%= thought.timestamp %></p>
+      <p class="opacity-50"><%= thought.timeSincePosting %> ago</p>
     </header>
     <h2><%= thought.title %></h2>
     <p><%= thought.text %></p>
