@@ -15,12 +15,10 @@
   <form action="/thoughts/new" method="POST" class="mt-8 mx-auto not-prose">
     <ul class="flex flex-col gap-4">
       <li>
-        <input type="text" name="thoughtTitle" id="titleInput" class="input w-full prose validator" placeholder="Title*" required minLength="1" maxLength="70">
-        <p class="validator-hint hidden">Must be between 1 and 70 characters</p>
+        <input type="text" name="thoughtTitle" id="titleInput" class="input w-full prose" placeholder="Title*" required>
       </li>
       <li>
-        <textarea name="thoughtBody" id="thoughtInput" class="textarea w-full prose validator" placeholder="Add your thoughts*" required rows="6"></textarea>
-        <p class="validator-hint hidden">Must be between 1 and 255 characters</p>
+        <textarea name="thoughtBody" id="thoughtInput" class="textarea w-full prose" placeholder="Add your thoughts*" required rows="6"></textarea>
       </li>
       <li class="self-end">
         <button type="submit" class="btn btn-primary">Post</button>
