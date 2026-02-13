@@ -18,7 +18,6 @@ const validateRegistrationForm = [
 		.isLength({ min: 1, max: 255 })
 		.withMessage(`Last name ${CHAR_LENGTH_ERROR_255}`),
 
-	// TODO: check if username already exists in database. if yes, prompt user to sign in instead
 	body("username")
 		.trim()
 		.isEmail()
@@ -26,7 +25,6 @@ const validateRegistrationForm = [
 		.isLength({ min: 1, max: 255 })
 		.withMessage(`Email ${CHAR_LENGTH_ERROR_255}`),
 
-	// TODO: add password strength meter: https://github.com/zxcvbn-ts/zxcvbn
 	body("password")
 		.isLength({ min: 8, max: 64 })
 		.withMessage("Password must be between 8 and 64 characters"),
@@ -36,4 +34,16 @@ const validateRegistrationForm = [
 		.withMessage("Passwords must match"),
 ];
 
-export { validateRegistrationForm };
+const validateNewThought = [
+	body("thoughtTitle")
+		.trim()
+		.isLength({ min: 1, max: 70 })
+		.withMessage("Title of thought must be between 1 and 70 characters"),
+
+	body("thoughtBody")
+		.trim()
+		.isLength({ min: 1, max: 255 })
+		.withMessage(`Thought ${CHAR_LENGTH_ERROR_255}`),
+];
+
+export { validateNewThought, validateRegistrationForm };
