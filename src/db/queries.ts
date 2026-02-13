@@ -30,4 +30,49 @@ const getUserById = async (id: string) => {
 	return rows[0];
 };
 
-export { addUser, getUserById, getUserByUsername };
+type PermissionLevels = "member" | "admin";
+const getPermissionElevationPasskey = async (
+	permissionLevel: PermissionLevels,
+) => {
+	const { rows } = await pool.query(
+		"SELECT passkey FROM passkeys WHERE elevate_to = $1;",
+		[permissionLevel],
+	);
+	if (!rows.length) return null;
+	return rows[0].passkey;
+};
+
+const elevateUserToMember = async (userId: string) => {
+	try {
+		await pool.query("UPDATE users SET is_member = true WHERE id = $1", [
+			userId,
+		]);
+		console.log("User has been added as member");
+	} catch (err) {
+		console.error("Error when elevating user to 'member':", err);
+		throw err;
+	}
+};
+
+const elevateUserToAdmin = async (userId: string) => {
+	try {
+		// all admins should also be members
+		await pool.query(
+			"UPDATE users SET is_admin = true, is_member = true WHERE id = $1",
+			[userId],
+		);
+		console.log("User has been added as member");
+	} catch (err) {
+		console.error("Error when elevating user to 'member':", err);
+		throw err;
+	}
+};
+
+export {
+	addUser,
+	elevateUserToMember,
+	elevateUserToAdmin,
+	getPermissionElevationPasskey,
+	getUserById,
+	getUserByUsername,
+};
