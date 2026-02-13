@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS users (
   is_admin boolean NOT NULL DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS messages (
+CREATE TABLE IF NOT EXISTS thoughts (
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   author_id integer REFERENCES users(id),
   title varchar(70) NOT NULL,
