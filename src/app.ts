@@ -9,6 +9,7 @@ import passport from "./config/passport.js";
 import { pool } from "./db/pool.js";
 import indexRouter from "./routers/indexRouter.js";
 import loginRouter from "./routers/loginRouter.js";
+import permissionsRouter from "./routers/permissionsRouter.js";
 import registerRouter from "./routers/registerRouter.js";
 
 const app = express();
@@ -55,6 +56,7 @@ app.use(express.urlencoded({ extended: true }));
 
 /* routes */
 app.use("/", indexRouter);
+app.use("/", permissionsRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 
