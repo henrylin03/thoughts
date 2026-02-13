@@ -9,6 +9,6 @@ const thoughtsRouter = Router();
 
 thoughtsRouter.get("/", allThoughtsGet);
 thoughtsRouter.get("/new", newThoughtGet);
-thoughtsRouter.post("/new", newThoughtPost);
+thoughtsRouter.post("/new", ...newThoughtPost);
 
 export default thoughtsRouter;
