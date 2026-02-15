@@ -102,9 +102,23 @@ const elevateUserToAdmin = async (userId: string) => {
 	}
 };
 
+const deleteThought = async (thoughtId: string) => {
+	try {
+		await pool.query("DELETE FROM thoughts WHERE id = $1", [thoughtId]);
+		console.log("Thought successfully deleted");
+	} catch (err) {
+		console.error(
+			`Error when trying to delete thought with id ${thoughtId}:`,
+			err,
+		);
+		throw err;
+	}
+};
+
 export {
 	addThought,
 	addUser,
+	deleteThought,
 	elevateUserToMember,
 	elevateUserToAdmin,
 	getAllThoughts,
