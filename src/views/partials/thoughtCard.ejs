@@ -12,6 +12,7 @@
     <h2 class="text-2xl font-bold wrap-break-word hyphens-manual"><%= thought.title %></h2>
     <p class="wrap-break-word"><%= thought.text %></p>
   </div>
+  <% if (currentUser && currentUser.is_admin) { %>
   <form method="POST" action="/thoughts/<%= thought.id %>/delete" class="absolute top-0 right-0 translate-x-4 -translate-y-3">
     <button type="submit" class="btn btn-outline btn-circle btn-sm btn-error" aria-label="Delete thought">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash-x w-5 h-5">
@@ -22,5 +23,6 @@
         <path d="M10 12l4 4m0 -4l-4 4" />
       </svg>
     </button>
-    </form>
+  </form>
+  <% } %>
 </article>
