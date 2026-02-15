@@ -35,11 +35,12 @@ const addThought = async (
 const getAllThoughts = async () => {
 	const { rows } = await pool.query(`
 SELECT 
-	u.first_name AS author_first_name, 
-	u.last_name AS author_last_name, 
+	t.id,
 	t.title, 
 	t.text, 
-	t.timestamp
+	t.timestamp,
+	u.first_name AS author_first_name, 
+	u.last_name AS author_last_name
 FROM thoughts AS t
 JOIN users AS u 
 	ON t.author_id = u.id
@@ -101,9 +102,23 @@ const elevateUserToAdmin = async (userId: string) => {
 	}
 };
 
+const deleteThought = async (thoughtId: string) => {
+	try {
+		await pool.query("DELETE FROM thoughts WHERE id = $1", [thoughtId]);
+		console.log("Thought successfully deleted");
+	} catch (err) {
+		console.error(
+			`Error when trying to delete thought with id ${thoughtId}:`,
+			err,
+		);
+		throw err;
+	}
+};
+
 export {
 	addThought,
 	addUser,
+	deleteThought,
 	elevateUserToMember,
 	elevateUserToAdmin,
 	getAllThoughts,
