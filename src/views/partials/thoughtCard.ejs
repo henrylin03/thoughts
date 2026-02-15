@@ -1,4 +1,4 @@
-<article class="p-4 flex gap-4 shadow border border-gray-600 rounded-xl">
+<article class="p-4 flex gap-4 shadow border border-gray-600 rounded-xl relative">
   <div class="avatar flex-none">
     <div class="w-8 h-8 rounded-full">
       <img alt="Avatar" src="https://api.dicebear.com/9.x/initials/svg?seed='<%= thought.author_first_name %> <%= thought.author_last_name %>'" />
@@ -6,10 +6,19 @@
   </div>
   <div class="flex-1 flex flex-col gap-1 w-8/10">
     <header class="flex items-center justify-between">
-      <p class="text-sm"><%= thought.author_first_name %> <%=thought.author_last_name%></p>
+      <p class="text-sm"><%= thought.author_first_name %> <%= thought.author_last_name %></p>
       <p class="text-sm opacity-50"><%= thought.timeSincePosting %> ago</p>
     </header>
     <h2 class="text-2xl font-bold wrap-break-word hyphens-manual"><%= thought.title %></h2>
     <p class="wrap-break-word"><%= thought.text %></p>
   </div>
+  <a role="button" class="btn btn-outline btn-circle btn-sm btn-error absolute top-0 right-0 translate-x-4 -translate-y-3" aria-label="Delete thought" href="/delete/[thought.id]">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash-x w-5 h-5">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M4 7h16" />
+      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+      <path d="M10 12l4 4m0 -4l-4 4" />
+    </svg>
+  </a>
 </article>
