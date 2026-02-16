@@ -8,6 +8,7 @@ export const prodDbConfig = {
 	password: process.env.PROD_DB_PW,
 	ssl: {
 		rejectUnauthorized: true,
+		checkServerIdentity: () => undefined,
 	},
 };
 
