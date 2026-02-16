@@ -60,7 +60,10 @@ INSERT INTO passkeys VALUES('admin', '${permissionPasskeys.toAdmin}');
 
 	console.log("seeding...");
 	const client = new Client({
-		connectionString: process.env.LOCAL_DATABASE_URL,
+		connectionString: process.env.PROD_DATABASE_URL,
+		ssl: {
+			rejectUnauthorized: false,
+		},
 	});
 
 	await client.connect();

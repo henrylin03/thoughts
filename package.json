@@ -1,10 +1,10 @@
 {
-	"name": "members-only",
-	"description": "An exclusive clubhouse where members can write anonymous posts. Inside the clubhouse, members can see who the author of a post is, but outside they can only see the story and wonder who wrote it.",
+	"name": "thoughts",
+	"description": "An exclusive clubhouse where members can share their thoughts. Inside the clubhouse, members can see who the author of a post is, but outside, they can only see the thought and wonder who wrote it.",
 	"main": "./src/app.js",
 	"scripts": {
 		"build": "tsc",
-		"dev": "tsx ./src/app.ts",
+		"start": "tsx ./src/app.ts",
 		"seed-db": "node ./src/db/populatedb.ts",
 		"build:css": "npx @tailwindcss/cli -i ./public/css/input.css -o ./public/css/output.css --watch"
 	},
@@ -17,7 +17,7 @@
 		"connect-flash": "^0.1.1",
 		"connect-pg-simple": "^10.0.0",
 		"dayjs": "^1.11.19",
-		"dotenv": "^17.2.4",
+		"dotenv": "^17.3.1",
 		"ejs": "^4.0.1",
 		"express": "^5.2.1",
 		"express-ejs-layouts": "^2.5.1",
@@ -29,7 +29,7 @@
 		"tailwindcss": "^4.1.18"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.14",
+		"@biomejs/biome": "2.4.0",
 		"@tailwindcss/typography": "^0.5.19",
 		"@types/connect-flash": "^0.0.40",
 		"@types/connect-pg-simple": "^7.0.3",
@@ -41,7 +41,7 @@
 		"@types/passport-local": "^1.0.38",
 		"@types/pg": "^8.16.0",
 		"daisyui": "^5.5.18",
-		"lefthook": "^2.1.0",
+		"lefthook": "^2.1.1",
 		"tsx": "^4.21.0",
 		"typescript": "^5.9.3"
 	}

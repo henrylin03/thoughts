@@ -58,8 +58,8 @@ app.get("/", (_req, res) => res.redirect("/thoughts"));
 app.use("/", authRouter);
 app.use("/thoughts", thoughtsRouter);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, (err) => {
-	if (err) throw Error;
+	if (err) throw err;
 	console.log(`Listening on port ${PORT}`);
 });
