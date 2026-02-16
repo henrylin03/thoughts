@@ -2,10 +2,7 @@ import { Pool } from "pg";
 import "dotenv/config";
 
 export const prodDbConfig = {
-	host: process.env.PROD_DB_HOST,
-	database: process.env.PROD_DB_NAME,
-	user: process.env.PROD_DB_USER,
-	password: process.env.PROD_DB_PW,
+	connectionString: process.env.PROD_DB_URL,
 	ssl: {
 		rejectUnauthorized: true,
 		checkServerIdentity: () => undefined,
