@@ -29,7 +29,7 @@
 		"tailwindcss": "^4.1.18"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.0",
+		"@biomejs/biome": "2.4.1",
 		"@tailwindcss/typography": "^0.5.19",
 		"@types/connect-flash": "^0.0.40",
 		"@types/connect-pg-simple": "^7.0.3",

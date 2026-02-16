@@ -3,6 +3,7 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
 import { Client } from "pg";
+import { prodDbConfig } from "./pool.js";
 
 type PermissionPasskeys = {
 	toMember: string;
@@ -59,12 +60,7 @@ INSERT INTO passkeys VALUES('admin', '${permissionPasskeys.toAdmin}');
 `;
 
 	console.log("seeding...");
-	const client = new Client({
-		connectionString: process.env.PROD_DATABASE_URL,
-		ssl: {
-			rejectUnauthorized: false,
-		},
-	});
+	const client = new Client(prodDbConfig);
 
 	await client.connect();
 	await client.query(createTablesQuery);
