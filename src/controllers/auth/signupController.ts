@@ -4,8 +4,10 @@ import { matchedData, validationResult } from "express-validator";
 import { addUser } from "@/db/queries.js";
 import { validateRegistrationForm } from "@/helpers/validation.js";
 
+const PAGE_TITLE = "Create account";
+
 const signupUserGet = async (_req: Request, res: Response) => {
-	res.render("pages/signupForm");
+	res.render("pages/signupForm", { title: PAGE_TITLE });
 };
 
 const signupUserPost = [
@@ -13,9 +15,10 @@ const signupUserPost = [
 	async (req: Request, res: Response) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty())
-			return res
-				.status(400)
-				.render("pages/signupForm", { errors: errors.array() });
+			return res.status(400).render("pages/signupForm", {
+				errors: errors.array(),
+				title: PAGE_TITLE,
+			});
 
 		const { firstName, lastName, username, password } = matchedData(req);
 		const salt = await bcrypt.genSalt();

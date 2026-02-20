@@ -25,6 +25,11 @@ dayjs.updateLocale("en", {
 	},
 });
 
+const PAGE_TITLES = {
+	allThoughts: "Latest thoughts",
+	newThought: "Add thought",
+};
+
 const allThoughtsGet = async (_req: Request, res: Response) => {
 	const fetchedThoughts = await getAllThoughts();
 	const thoughts = fetchedThoughts.map((thought) => {
@@ -32,7 +37,7 @@ const allThoughtsGet = async (_req: Request, res: Response) => {
 		return { ...attributes, timeSincePosting: dayjs(timestamp).toNow(true) };
 	});
 
-	res.render("pages/allThoughts", { title: "Latest thoughts", thoughts });
+	res.render("pages/allThoughts", { title: PAGE_TITLES.allThoughts, thoughts });
 };
 
 const deleteThoughtPost = async (req: Request, res: Response) => {
@@ -44,7 +49,7 @@ const deleteThoughtPost = async (req: Request, res: Response) => {
 };
 
 const newThoughtGet = (_req: Request, res: Response) => {
-	res.render("pages/newThought", { title: "Add thought" });
+	res.render("pages/newThought", { title: PAGE_TITLES.newThought });
 };
 
 const newThoughtPost = [
@@ -55,9 +60,10 @@ const newThoughtPost = [
 
 		const errors = validationResult(req);
 		if (!errors.isEmpty())
-			return res
-				.status(400)
-				.render("pages/newThought", { errors: errors.array() });
+			return res.status(400).render("pages/newThought", {
+				errors: errors.array(),
+				title: PAGE_TITLES.newThought,
+			});
 
 		const { thoughtTitle, thoughtBody } = matchedData(req);
 		await addThought(currentUser.id, thoughtTitle, thoughtBody);

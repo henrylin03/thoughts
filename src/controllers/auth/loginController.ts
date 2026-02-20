@@ -2,6 +2,8 @@ import type { Request, Response } from "express";
 import passport from "@/config/passport.js";
 import type { LoginError, LoginField } from "@/models/fields.js";
 
+const PAGE_TITLE = "Log in";
+
 const LOGIN_ERROR_MESSAGES = {
 	username: "Sorry, we couldn't find an account with that username.",
 	password: "Sorry, that password isn't right. Please try again.",
@@ -22,7 +24,7 @@ const loginGet = async (req: Request, res: Response) => {
 		message: LOGIN_ERROR_MESSAGES[fieldWithError] || "",
 	};
 
-	res.render("pages/loginForm", { error: loginError });
+	res.render("pages/loginForm", { error: loginError, title: PAGE_TITLE });
 };
 
 const loginPost = passport.authenticate("local", {
