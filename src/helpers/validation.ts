@@ -24,7 +24,9 @@ const validateRegistrationForm = [
 		.custom(async (value: string) => {
 			const user = await getUserByUsername(value);
 			if (user)
-				throw new Error("Username is already in use. Please log in instead.");
+				throw new Error(
+					"Username is already in use. <a href='/login' class='link'>Log in</a> instead.",
+				);
 		})
 		.isEmail()
 		.withMessage("Please enter a valid email address")
